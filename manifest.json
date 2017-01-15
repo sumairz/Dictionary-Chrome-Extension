@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+
+  "name": "Goto Dictionary",
+  "description": "Select a word from page and find its meaning",
+  "version": "1.0",
+  "icons": {"16": "icon.png",
+           "48": "icon.png",
+          "128": "icon.png" },
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Select a word from page and find its meaning"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}

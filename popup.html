@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Goto Dictionary</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+      }
+      #status {
+        /* avoid an excessively wide status text */
+        white-space: pre;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 400px;
+      }
+    </style>
+
+     <script src="scripts/pearson.dictionary.js"></script>
+  </head>
+  <body>
+    <div id="title"><h4>Dictionary</h4></div>
+    <div id="status"></div>
+    <div id="result" style="width:400px;"></div>
+  </body>
+</html>
+
