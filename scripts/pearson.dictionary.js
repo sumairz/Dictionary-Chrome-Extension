@@ -2,17 +2,17 @@
 // ----------------------------
 // http://developer.pearson.com/apis/dictionaries
 
-
-// initializing variable to save selected word
-var selectedWord = "";
+//Global API URL variable
+var apiURL = "http://api.pearson.com/v2/dictionaries/entries?headword="; 
 
 // getting the selected word from window object
 chrome.tabs.executeScript( {
   code: "window.getSelection().toString();"
 }, function(selection) {
-    selectedWord = selection[0];
+    var selectedWord = selection;
     getDefinition(selectedWord);
 });
+
 
 /*
 * Send ajax requests
@@ -27,11 +27,24 @@ function sendAjaxRequest(requestType,apiURL) {
     xhr.responseType = 'json';
 
     xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {        
+        if (xhr.readyState == 4) {    
             handleAjaxResponse(xhr);
         }
     }
     xhr.send();
+}
+
+
+/*
+* handle the returned response from ajax request
+* @Param
+* apiResponse: Response from Ajax request
+*/
+function showNotification(apiResponse) {
+    var responseCount = apiResponse.response.count;
+    var response = apiResponse.response.results;   
+
+    sendRequest("createNotification",response[0].senses[0].definition);
 }
 
 /*
@@ -99,6 +112,12 @@ function loadDefinitions(count,definitions) {
     }    
 }
 
+
+function clearResults() {
+    var el = document.getElementById('result');
+    el.innerHTML = "";
+}
+
 /*
 * Make calls to get definition of the selected word
 * @Param
@@ -106,11 +125,10 @@ function loadDefinitions(count,definitions) {
 */
 function getDefinition(word) {
 
-    if(word != "") {
-        var apiURL = "http://api.pearson.com/v2/dictionaries/entries?headword="+word;  
-
+    if(word != "" && typeof word != 'undefined') {        
+        clearResults();
         changeStatusBar('Finding <b>"' + word + '"</b> definition');
-        sendAjaxRequest('GET',apiURL);
+        sendAjaxRequest('GET',apiURL+word,'popup');
     }
     else{
         changeStatusBar('<p style="color:red;">Select a word from the page</p>');
