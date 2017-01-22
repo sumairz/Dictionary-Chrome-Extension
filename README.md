@@ -8,7 +8,7 @@ The main source code is inside
 scripts/pearson.dictionary.js
 
 Update: 21-01-2017
-
+------------------
 * Added permission for "notification"
 * Added context Menu(right click menus) to get instant definition a word.
 * Right click on a selected word click option "Define This" and get a notification with the selected word definition.
