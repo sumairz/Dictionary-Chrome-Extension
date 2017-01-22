@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
 
   "name": "Goto Dictionary",
   "description": "Select a word from page and find its meaning",
